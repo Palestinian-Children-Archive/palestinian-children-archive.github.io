@@ -1,6 +1,6 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
 
-import routes from "@/navigation/routes";
+import routes, { pages } from "@/navigation/routes";
 import Navigation from "./components/ui/Navigation";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
         <Navigation />
         <main>
           <Routes>
-            {routes.map((r) => (
+            {[...routes, ...pages].map((r) => (
               <Route key={r.path} path={r.path} Component={r.component} />
             ))}
           </Routes>
