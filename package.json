@@ -1,9 +1,9 @@
 {
-  "name": "palestinian-archive",
+  "name": "palestinian-children-archive",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ou-disc.github.io/palestinian-archive/",
+  "homepage": "https://palestinian-children-archive.github.io/",
   "scripts": {
     "dev": "vite",
     "build": "vite build --base=./",
