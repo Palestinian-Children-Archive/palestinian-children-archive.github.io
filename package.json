@@ -1,12 +1,12 @@
 {
   "name": "palestinian-children-archive",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "homepage": "https://palestinian-children-archive.github.io/",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=./",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
