@@ -9,23 +9,20 @@ import {
   Grid,
   useTheme,
 } from "@mui/material";
-import {
-  Book as BookIcon,
-  Map as MapIcon,
-  AccountBalance as BuildingIcon,
-  SpeakerGroup,
-  QuestionMark,
-} from "@mui/icons-material";
+import { Link } from "react-router-dom";
+
 import { pages } from "../routes";
 
 const FeatureCard = ({
   icon: Icon,
   title,
   description,
+  to,
 }: {
   icon: FC;
   title: string;
   description: string;
+  to: string;
 }) => {
   const theme = useTheme();
 
@@ -37,18 +34,18 @@ const FeatureCard = ({
         color: "white",
         "&:hover": {
           backgroundColor: theme.palette.primary.dark,
-          cursor: "pointer",
         },
         transition: "background-color 0.3s",
       }}
     >
-      <CardContent>
+      <CardContent sx={{ height: "100%" }}>
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             textAlign: "center",
+            height: "100%",
           }}
         >
           <Icon sx={{ fontSize: 40, mb: 2 }} />
@@ -59,6 +56,7 @@ const FeatureCard = ({
             {description}
           </Typography>
           <Button
+            component={Link}
             variant="contained"
             sx={{
               mt: "auto",
@@ -67,6 +65,7 @@ const FeatureCard = ({
                 backgroundColor: theme.palette.primary.darker,
               },
             }}
+            to={to}
           >
             Find
           </Button>
@@ -79,7 +78,6 @@ const FeatureCard = ({
 const HomePage = () => {
   return (
     <Box>
-      {/* Hero Section */}
       <Box sx={{ bgcolor: "primary.dark", color: "white", py: 8 }}>
         <Container>
           <Grid container spacing={4} alignItems="center">
@@ -107,7 +105,6 @@ const HomePage = () => {
         </Container>
       </Box>
 
-      {/* Features Grid */}
       <Container sx={{ py: 8 }}>
         <Grid container spacing={3}>
           {pages.map((feature, index) => (
@@ -116,13 +113,13 @@ const HomePage = () => {
                 icon={feature.icon}
                 title={feature.label}
                 description={feature.description}
+                to={feature.path}
               />
             </Grid>
           ))}
         </Grid>
       </Container>
 
-      {/* About Section */}
       <Box sx={{ bgcolor: "background.paper", py: 8 }}>
         <Container>
           <Grid container spacing={4}>
