@@ -1,17 +1,25 @@
 import { FC } from "react";
 import { Box, Container, Typography, Button, Grid } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import { motion } from "framer-motion";
+
 import { pages } from "../routes";
 import HeroImage from "../../assets/hero-image.png";
 import WhyImage from "../../assets/why.jpg";
 import FeatureCard from "@/components/ui/FeatureCard";
 
-const HeroSection: FC = () => {
-  const theme = useTheme();
+const MotionBox = motion(Box);
+const MotionTypography = motion(Typography);
+const MotionGrid = motion(Grid);
 
+const HeroSection: FC = () => {
   return (
-    <Box
+    <MotionBox
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
       sx={{
+        position: "relative",
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${HeroImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -22,7 +30,10 @@ const HeroSection: FC = () => {
       }}
     >
       <Container maxWidth="md">
-        <Box
+        <MotionBox
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
           sx={{
             bgcolor: "rgba(44, 82, 130, 0.95)",
             p: 4,
@@ -39,20 +50,52 @@ const HeroSection: FC = () => {
             of Palestine. Discover their oral, visual, and geographical
             histories.
           </Typography>
-        </Box>
+        </MotionBox>
       </Container>
-    </Box>
+
+      <Typography
+        variant="caption"
+        sx={{
+          position: "absolute",
+          bottom: 8,
+          right: 16,
+          color: "white",
+          backgroundColor: "rgba(0,0,0,0.5)",
+          padding: "4px 8px",
+          borderRadius: 1,
+        }}
+      >
+        Hero Image © [Credit Name]
+      </Typography>
+    </MotionBox>
   );
 };
-
 const FeaturesSection: FC = () => (
   <Container sx={{ py: 8 }}>
-    <Typography variant="h4" gutterBottom sx={{ mb: 4, textAlign: "center" }}>
+    <MotionTypography
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      variant="h4"
+      gutterBottom
+      sx={{ mb: 4, textAlign: "center" }}
+    >
       Explore the Palestinian Children Digital Archive
-    </Typography>
+    </MotionTypography>
     <Grid container spacing={4}>
       {pages.map((feature, index) => (
-        <Grid item xs={12} sm={6} md={3} key={index}>
+        <MotionGrid
+          item
+          xs={12}
+          sm={6}
+          md={3}
+          key={index}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.2, duration: 0.5 }}
+          viewport={{ once: true }}
+        >
           <FeatureCard
             description={feature.description}
             icon={feature.icon}
@@ -60,7 +103,7 @@ const FeaturesSection: FC = () => (
             to={feature.path}
             order={index}
           />
-        </Grid>
+        </MotionGrid>
       ))}
     </Grid>
   </Container>
@@ -70,7 +113,15 @@ const WhySection: FC = () => (
   <Box sx={{ bgcolor: "grey.50", py: 8 }}>
     <Container>
       <Grid container spacing={6} alignItems="center">
-        <Grid item xs={12} md={4}>
+        <MotionGrid
+          item
+          xs={12}
+          md={4}
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
           <Box
             component="img"
             src={WhyImage}
@@ -81,10 +132,29 @@ const WhySection: FC = () => (
               boxShadow: 3,
             }}
           />
-        </Grid>
-        <Grid item xs={12} md={8}>
+          <Typography
+            variant="caption"
+            sx={{
+              color: "white",
+              backgroundColor: "rgba(0,0,0,0.5)",
+              padding: "4px 8px",
+              borderRadius: 1,
+            }}
+          >
+            © [Credit Name]
+          </Typography>
+        </MotionGrid>
+        <MotionGrid
+          item
+          xs={12}
+          md={8}
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
           <Typography variant="h4" gutterBottom>
-            Why This Archive Matters
+            Why
           </Typography>
           <Typography
             color="textPrimary"
@@ -194,7 +264,7 @@ const WhySection: FC = () => (
           <Button variant="contained" size="large" sx={{ mt: 3 }}>
             View Project Documentation
           </Button>
-        </Grid>
+        </MotionGrid>
       </Grid>
     </Container>
   </Box>

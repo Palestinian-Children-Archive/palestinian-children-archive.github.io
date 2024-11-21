@@ -64,11 +64,12 @@ export default function Navigation() {
           <Typography
             component={Link}
             to="/"
-            variant="h6"
+            variant="h4"
             sx={{
               flexGrow: 1,
               textDecoration: "none",
               color: "inherit",
+              fontWeight: "600",
             }}
           >
             Palestinian Children Archive
