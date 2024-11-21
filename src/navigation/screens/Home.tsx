@@ -153,9 +153,6 @@ const WhySection: FC = () => (
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Typography variant="h4" gutterBottom>
-            Why
-          </Typography>
           <Typography
             color="textPrimary"
             fontWeight="100"
@@ -270,7 +267,7 @@ const WhySection: FC = () => (
   </Box>
 );
 const HomePage: FC = () => (
-  <Box>
+  <Box bgcolor="background.paper">
     <HeroSection />
     <FeaturesSection />
     <WhySection />
