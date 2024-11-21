@@ -54,7 +54,12 @@ export default function Navigation() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="transparent" elevation={0}>
+      <AppBar
+        position="sticky"
+        sx={{ height: "70px" }}
+        color="default"
+        elevation={0}
+      >
         <Toolbar>
           <Typography
             component={Link}

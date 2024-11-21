@@ -1,161 +1,210 @@
 import { FC } from "react";
-import {
-  Box,
-  Card,
-  CardContent,
-  Container,
-  Typography,
-  Button,
-  Grid,
-  useTheme,
-} from "@mui/material";
-import { Link } from "react-router-dom";
-
+import { Box, Container, Typography, Button, Grid } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { pages } from "../routes";
+import HeroImage from "../../assets/hero-image.png";
+import WhyImage from "../../assets/why.jpg";
+import FeatureCard from "@/components/ui/FeatureCard";
 
-const FeatureCard = ({
-  icon: Icon,
-  title,
-  description,
-  to,
-}: {
-  icon: FC;
-  title: string;
-  description: string;
-  to: string;
-}) => {
+const HeroSection: FC = () => {
   const theme = useTheme();
 
   return (
-    <Card
+    <Box
       sx={{
-        height: "100%",
-        backgroundColor: theme.palette.primary.main,
-        color: "white",
-        "&:hover": {
-          backgroundColor: theme.palette.primary.dark,
-        },
-        transition: "background-color 0.3s",
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${HeroImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "calc(100vh - 70px)",
+        py: 8,
+        display: "flex",
+        alignItems: "center",
       }}
     >
-      <CardContent sx={{ height: "100%" }}>
+      <Container maxWidth="md">
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            bgcolor: "rgba(44, 82, 130, 0.95)",
+            p: 4,
+            borderRadius: 2,
             textAlign: "center",
-            height: "100%",
+            color: "white",
           }}
         >
-          <Icon sx={{ fontSize: 40, mb: 2 }} />
-          <Typography variant="h6" gutterBottom>
-            {title}
+          <Typography variant="h3" component="h1" gutterBottom>
+            Palestinian Children Archive
           </Typography>
-          <Typography variant="body2" sx={{ mb: 2 }}>
-            {description}
+          <Typography variant="h6">
+            Explore the lives of Palestine's children during the British Mandate
+            of Palestine. Discover their oral, visual, and geographical
+            histories.
           </Typography>
-          <Button
-            component={Link}
-            variant="contained"
-            sx={{
-              mt: "auto",
-              backgroundColor: theme.palette.primary.dark,
-              "&:hover": {
-                backgroundColor: theme.palette.primary.darker,
-              },
-            }}
-            to={to}
-          >
-            Find
-          </Button>
         </Box>
-      </CardContent>
-    </Card>
-  );
-};
-
-const HomePage = () => {
-  return (
-    <Box>
-      <Box sx={{ bgcolor: "primary.dark", color: "white", py: 8 }}>
-        <Container>
-          <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <Typography variant="h3" component="h1" gutterBottom>
-                Palestinian Children Archive
-              </Typography>
-              <Typography variant="h6">
-                Explore the lives of Palestine's children during the British
-                Mandate of Palestine. Explore the oral, visual, and geographical
-                aspects of their lives.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 300,
-                  bgcolor: "primary.main",
-                  borderRadius: 1,
-                }}
-              />
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-
-      <Container sx={{ py: 8 }}>
-        <Grid container spacing={3}>
-          {pages.map((feature, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
-              <FeatureCard
-                icon={feature.icon}
-                title={feature.label}
-                description={feature.description}
-                to={feature.path}
-              />
-            </Grid>
-          ))}
-        </Grid>
       </Container>
-
-      <Box sx={{ bgcolor: "background.paper", py: 8 }}>
-        <Container>
-          <Grid container spacing={4}>
-            <Grid item xs={12} md={4}>
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 300,
-                  bgcolor: "grey.200",
-                  borderRadius: 1,
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} md={8}>
-              <Typography variant="h4" component="h2" gutterBottom>
-                About
-              </Typography>
-              <Typography
-                variant="body1"
-                paragraph
-                sx={{ color: "text.secondary" }}
-              >
-                The Palestinian Children Archive aggregates and collates many
-                different sources of information that document and illustrate
-                the lives of the children of Palestine and their struggles
-                during the British Mandate of Palestine.
-              </Typography>
-              <Button variant="contained" color="primary" size="large">
-                View project documentation
-              </Button>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
     </Box>
   );
 };
+
+const FeaturesSection: FC = () => (
+  <Container sx={{ py: 8 }}>
+    <Typography variant="h4" gutterBottom sx={{ mb: 4, textAlign: "center" }}>
+      Explore the Palestinian Children Digital Archive
+    </Typography>
+    <Grid container spacing={4}>
+      {pages.map((feature, index) => (
+        <Grid item xs={12} sm={6} md={3} key={index}>
+          <FeatureCard
+            description={feature.description}
+            icon={feature.icon}
+            title={feature.label}
+            to={feature.path}
+            order={index}
+          />
+        </Grid>
+      ))}
+    </Grid>
+  </Container>
+);
+
+const WhySection: FC = () => (
+  <Box sx={{ bgcolor: "grey.50", py: 8 }}>
+    <Container>
+      <Grid container spacing={6} alignItems="center">
+        <Grid item xs={12} md={4}>
+          <Box
+            component="img"
+            src={WhyImage}
+            sx={{
+              width: "100%",
+              height: "auto",
+              borderRadius: 2,
+              boxShadow: 3,
+            }}
+          />
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <Typography variant="h4" gutterBottom>
+            Why This Archive Matters
+          </Typography>
+          <Typography
+            color="textPrimary"
+            fontWeight="100"
+            variant="h4"
+            component="h2"
+            gutterBottom
+          >
+            Why
+          </Typography>
+
+          <Typography
+            variant="body1"
+            paragraph
+            sx={{ color: "text.secondary" }}
+          >
+            The Palestinian Childhood Archive during the British mandate
+            addresses a critical gap in both historical scholarship and the
+            broader cultural narrative regarding Palestinians during the British
+            colonial period. The project is especially urgent because it aims to
+            counter long-standing marginalization and stereotypes while
+            preserving a disappearing generation's uniquely lived experiences.
+          </Typography>
+
+          <Typography
+            variant="body1"
+            paragraph
+            sx={{ color: "text.secondary" }}
+          >
+            The project is vital due to these key reasons:
+          </Typography>
+
+          <Typography
+            variant="body1"
+            paragraph
+            sx={{ color: "text.secondary" }}
+          >
+            1. Challenging Western Discourse and Orientalist Stereotypes In
+            Western oriental narratives, Palestinian children are often rendered
+            invisible, and their experiences are overshadowed. Palestinians are
+            rarely acknowledged as individuals with rich, complex lives shaped
+            by culture, community, and history. During the British Mandate,
+            colonial discourses were embedded in Orientalism, which portrayed
+            Palestinian children as “savage” and "primitive." These children
+            were depicted as lacking hygiene, discipline, or the capacity for
+            intellectual development—reflecting a broader dehumanization of the
+            Palestinian population. Such perspectives ignored the intricacies of
+            Palestinian cultural practices, community values, and the local
+            realities that shaped childhood experiences in Palestine. The
+            Palestinian Childhood Archive provides alternatives to stereotypes
+            that have been facilitated and understood through the Western
+            Orientalist perspective.
+          </Typography>
+
+          <Typography
+            variant="body1"
+            paragraph
+            sx={{ color: "text.secondary" }}
+          >
+            2. Urgency Due to the Disappearing Generation The urgency of this
+            project is due to the rapid aging of the generation who experienced
+            childhood during the British Mandate. Many individuals who were
+            children between 1917 and 1948 are now elderly, and their
+            testimonies or oral histories are at risk of being lost. Oral
+            histories from this generation are a crucial form of historical
+            evidence, and the window for gathering these first-hand accounts is
+            closing quickly. This project ensures that their voices are
+            preserved for future generations, creating a lasting record of their
+            lived experiences before it is too late.
+          </Typography>
+
+          <Typography
+            variant="body1"
+            paragraph
+            sx={{ color: "text.secondary" }}
+          >
+            3. Lack of Palestinian Ownership of Archival Documentation A key
+            challenge facing the Palestinian community is the lack of ownership
+            and control over archival documentation from the period of British
+            rule. Many records from the Mandate period were produced and
+            maintained by British authorities or foreign institutions, and these
+            archives are often incomplete, biased, or inaccessible to
+            Palestinians. This gap has left the Palestinian community without a
+            comprehensive, authentic record of its own history from this era.
+            The Palestinian Childhood Archive seeks to fill this gap by creating
+            an online digital repository of Palestinian childhood experiences.
+            This digital archive will house videos, audio recordings,
+            photographs, and documents, all systematically categorized around
+            the concept of "childhood infrastructure" in British-occupied
+            Palestine.
+          </Typography>
+
+          <Typography
+            variant="body1"
+            paragraph
+            sx={{ color: "text.secondary" }}
+          >
+            4. The Global South The archive is not just a repository of
+            historical data; it is a tool for reclaiming the narrative around
+            Palestinian childhood. It also provides an example for others in the
+            global south societies to challenge the colonel narrative and
+            reclaim their history. By showcasing oral histories and archival
+            research it can provide a more accurate and empowering historical
+            record and inspire other communities whose histories have been
+            shaped or distorted by colonial policies.
+          </Typography>
+          <Button variant="contained" size="large" sx={{ mt: 3 }}>
+            View Project Documentation
+          </Button>
+        </Grid>
+      </Grid>
+    </Container>
+  </Box>
+);
+const HomePage: FC = () => (
+  <Box>
+    <HeroSection />
+    <FeaturesSection />
+    <WhySection />
+  </Box>
+);
 
 export default HomePage;
