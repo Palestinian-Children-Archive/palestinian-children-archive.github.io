@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ReactAudioPlayer from "react-audio-player";
 import {
   Box,
@@ -7,13 +6,8 @@ import {
   Grid,
   Card,
   CardContent,
-  IconButton,
-  useTheme,
-  Paper,
-  Collapse,
-  Divider,
 } from "@mui/material";
-import { ExpandMore as ExpandMoreIcon } from "@mui/icons-material";
+import { SpeakerGroup } from "@mui/icons-material";
 
 const interviews = [
   {
@@ -50,10 +44,7 @@ const paragraphs = [
   "The individual oral history component of the Palestinian Childhood Archive is integral to documenting the diverse, personal experiences of Palestinian children under the British Mandate. These individual accounts, which span different regions and backgrounds, offer historical nuances often overlooked in conventional archives or literature. By capturing these first-hand testimonies, the archive not only preserves the memories of an entire generation but also challenges existing stereotypes and colonial narratives. The project is an invaluable resource for researchers, educators, and future generations, offering a comprehensive understanding of how Palestinian childhood was shaped by colonialism, culture, and community. ",
 ];
 
-const AudioPlayer = ({ audioUrl, title, location, year, transcript }) => {
-  const [showTranscript, setShowTranscript] = useState(false);
-  const theme = useTheme();
-
+const AudioPlayer = ({ audioUrl, title, location, year }) => {
   return (
     <Card sx={{ mb: 3 }}>
       <CardContent>
@@ -67,35 +58,7 @@ const AudioPlayer = ({ audioUrl, title, location, year, transcript }) => {
           <Grid item>
             <ReactAudioPlayer src={audioUrl} autoPlay controls />
           </Grid>
-          <Grid item>
-            <IconButton
-              onClick={() => setShowTranscript(!showTranscript)}
-              sx={{ transform: showTranscript ? "rotate(180deg)" : "none" }}
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </Grid>
         </Grid>
-
-        <Collapse in={showTranscript}>
-          <Box sx={{ mt: 2 }}>
-            <Divider sx={{ my: 2 }} />
-            <Typography variant="subtitle1" gutterBottom>
-              Transcript
-            </Typography>
-            <Paper
-              variant="outlined"
-              sx={{
-                p: 2,
-                backgroundColor: theme.palette.grey[50],
-                maxHeight: "200px",
-                overflow: "auto",
-              }}
-            >
-              <Typography variant="body2">{transcript}</Typography>
-            </Paper>
-          </Box>
-        </Collapse>
       </CardContent>
     </Card>
   );
@@ -104,9 +67,16 @@ const AudioPlayer = ({ audioUrl, title, location, year, transcript }) => {
 const OralHistory = () => {
   return (
     <Box>
-      {/* Hero Section */}
-      <Box sx={{ bgcolor: "primary.dark", color: "white", py: 8 }}>
+      <Box
+        sx={{
+          bgcolor: "primary.dark",
+          color: "white",
+          py: 8,
+          textAlign: "center",
+        }}
+      >
         <Container>
+          <SpeakerGroup sx={{ fontSize: "100px" }} />
           <Typography variant="h3" component="h1" gutterBottom>
             Individual Oral Histories
           </Typography>
@@ -118,7 +88,6 @@ const OralHistory = () => {
         </Container>
       </Box>
 
-      {/* Description Section */}
       <Box sx={{ bgcolor: "background.paper", py: 6 }}>
         <Container>
           {paragraphs.map((p) => (
@@ -129,7 +98,6 @@ const OralHistory = () => {
         </Container>
       </Box>
 
-      {/* Audio Players Section */}
       <Box sx={{ py: 6 }}>
         <Container>
           <Typography variant="h4" component="h2" gutterBottom>
@@ -143,7 +111,6 @@ const OralHistory = () => {
                 title={interview.title}
                 location={interview.location}
                 year={interview.year}
-                transcript={interview.transcript}
               />
             ))}
           </Box>
