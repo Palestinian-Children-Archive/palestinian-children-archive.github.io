@@ -1,5 +1,12 @@
 import { FC } from "react";
-import { Box, Container, Typography, Button, Grid } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  Grid,
+  useTheme,
+} from "@mui/material";
 import { motion } from "framer-motion";
 
 import { pages } from "../routes";
@@ -12,6 +19,7 @@ const MotionTypography = motion(Typography);
 const MotionGrid = motion(Grid);
 
 const HeroSection: FC = () => {
+  const theme = useTheme();
   return (
     <MotionBox
       initial={{ opacity: 0 }}
@@ -28,18 +36,16 @@ const HeroSection: FC = () => {
         alignItems: "center",
       }}
     >
-      <Container sx={{ display: "flex" }}>
+      <Box sx={{ width: "100vw" }}>
         <MotionBox
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.8 }}
           sx={{
-            bgcolor: "rgba(44, 82, 130, 0.95)",
+            bgcolor: theme.palette.primary.dark,
             p: 4,
-            borderRadius: 2,
             textAlign: "center",
             color: "white",
-            width: "100vw",
           }}
         >
           <Typography variant="h3" component="h1" gutterBottom>
@@ -51,7 +57,7 @@ const HeroSection: FC = () => {
             histories.
           </Typography>
         </MotionBox>
-      </Container>
+      </Box>
 
       <Typography
         variant="caption"
@@ -80,6 +86,7 @@ const FeaturesSection: FC = () => (
       variant="h4"
       gutterBottom
       sx={{ mb: 4, textAlign: "center" }}
+      color="textPrimary"
     >
       Explore the Palestinian Children Digital Archive
     </MotionTypography>
