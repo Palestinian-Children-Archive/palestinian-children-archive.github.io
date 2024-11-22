@@ -1,5 +1,9 @@
 import { FC } from "react";
-import { Book } from "@mui/icons-material";
+import {
+  AccountBalance,
+  AccountBalanceOutlined,
+  Book,
+} from "@mui/icons-material";
 import {
   Box,
   Container,
@@ -59,13 +63,14 @@ const Infrastructure: FC = () => {
         }}
       >
         <Container>
-          <Book sx={{ fontSize: "100px" }} />
+          <AccountBalanceOutlined sx={{ fontSize: "100px" }} />
           <Typography variant="h3" component="h1" gutterBottom>
-            Childhood Records
+            Infrastructure
           </Typography>
-          <Typography variant="h6">
-            Archival data constitutes evidence of diverse perspectives about
-            Palestinian childhood reality during the British Mandate (BM).
+          <Typography>
+            Learn about the buildings, schools, and other infrastructure
+            essential to the lives of Palestinian children during the British
+            Mandate of Palestine.
           </Typography>
         </Container>
       </Box>
@@ -78,40 +83,46 @@ const Infrastructure: FC = () => {
             </Typography>
           ))}
         </Container>
-        <Container>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell align="center">Tradition</TableCell>
-                  <TableCell align="center">Healthcare</TableCell>
-                  <TableCell align="center">Policies</TableCell>
-                  <TableCell align="center">Religion</TableCell>
-                  <TableCell align="center">Education</TableCell>
-                  <TableCell align="center">Agriculture</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow
-                    key={row.tradition}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell align="center" component="th" scope="row">
-                      {row.tradition}
-                    </TableCell>
-                    <TableCell align="center">{row.healthcare}</TableCell>
-                    <TableCell align="center">{row.policies}</TableCell>
-                    <TableCell align="center">{row.religion}</TableCell>
-                    <TableCell align="center">{row.education}</TableCell>
-                    <TableCell align="center">{row.agriculture}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Container>
       </Box>
+      <Container sx={{ py: 7 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Infrastructure Examples
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table
+            sx={{ minWidth: 650 }}
+            aria-label="infrastructure examples table"
+          >
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">Tradition</TableCell>
+                <TableCell align="center">Healthcare</TableCell>
+                <TableCell align="center">Policies</TableCell>
+                <TableCell align="center">Religion</TableCell>
+                <TableCell align="center">Education</TableCell>
+                <TableCell align="center">Agriculture</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.tradition}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell align="center" component="th" scope="row">
+                    {row.tradition}
+                  </TableCell>
+                  <TableCell align="center">{row.healthcare}</TableCell>
+                  <TableCell align="center">{row.policies}</TableCell>
+                  <TableCell align="center">{row.religion}</TableCell>
+                  <TableCell align="center">{row.education}</TableCell>
+                  <TableCell align="center">{row.agriculture}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Container>
     </Box>
   );
 };

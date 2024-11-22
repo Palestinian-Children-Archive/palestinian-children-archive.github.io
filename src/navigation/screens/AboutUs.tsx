@@ -13,28 +13,21 @@ import { FC } from "react";
 const AboutUs: FC = () => {
   return (
     <Box>
-      <Box sx={{ bgcolor: "primary.dark", color: "white", py: 8 }}>
+      <Box
+        sx={{
+          bgcolor: "primary.dark",
+          color: "white",
+          py: 8,
+          textAlign: "center",
+        }}
+      >
         <Container>
-          <Grid container spacing={4} alignItems="center">
-            <Grid item xs={12} md={6}>
-              <Typography variant="h3" component="h1" gutterBottom>
-                About The Project
-              </Typography>
-              <Typography variant="h6">
-                Learn more about the Palestinian Childhood Archive here.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Box
-                sx={{
-                  width: "100%",
-                  height: 300,
-                  bgcolor: "primary.main",
-                  borderRadius: 1,
-                }}
-              />
-            </Grid>
-          </Grid>
+          <Typography variant="h3" component="h1" gutterBottom>
+            About The Project
+          </Typography>
+          <Typography variant="h6">
+            Learn more about the Palestinian Childhood Archive here.
+          </Typography>
         </Container>
       </Box>
 
@@ -68,6 +61,9 @@ const AboutUs: FC = () => {
 
       <Box sx={{ bgcolor: "primary.dark", py: 8 }}>
         <Container>
+          <Typography variant="h4" component="h1" gutterBottom>
+            Project Vectors
+          </Typography>
           {keyAspects.map((i) => (
             <Box sx={{ py: 2 }}>
               <Accordion>
