@@ -27,7 +27,7 @@ const ChildhoodRecords: FC = () => {
         <Container>
           <Book sx={{ fontSize: "100px" }} />
           <Typography variant="h3" component="h1" gutterBottom>
-            Childhood Records
+            Records of Human Experiences
           </Typography>
           <Typography variant="h6">
             Archival data constitutes evidence of diverse perspectives about

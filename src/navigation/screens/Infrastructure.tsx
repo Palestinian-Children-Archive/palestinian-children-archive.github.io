@@ -65,7 +65,7 @@ const Infrastructure: FC = () => {
         <Container>
           <AccountBalanceOutlined sx={{ fontSize: "100px" }} />
           <Typography variant="h3" component="h1" gutterBottom>
-            Infrastructure
+            Childhood Infrastructures
           </Typography>
           <Typography>
             Learn about the buildings, schools, and other infrastructure
