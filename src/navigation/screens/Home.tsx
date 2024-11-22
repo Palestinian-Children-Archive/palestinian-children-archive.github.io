@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { Box, Container, Typography, Button, Grid } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import { motion } from "framer-motion";
 
 import { pages } from "../routes";
@@ -20,7 +19,7 @@ const HeroSection: FC = () => {
       transition={{ duration: 1 }}
       sx={{
         position: "relative",
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${HeroImage})`,
+        // backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${HeroImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "calc(100vh - 70px)",
@@ -29,7 +28,7 @@ const HeroSection: FC = () => {
         alignItems: "center",
       }}
     >
-      <Container maxWidth="md">
+      <Container sx={{ display: "flex" }}>
         <MotionBox
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -40,6 +39,7 @@ const HeroSection: FC = () => {
             borderRadius: 2,
             textAlign: "center",
             color: "white",
+            width: "100vw",
           }}
         >
           <Typography variant="h3" component="h1" gutterBottom>
@@ -123,8 +123,8 @@ const WhySection: FC = () => (
           viewport={{ once: true }}
         >
           <Box
-            component="img"
-            src={WhyImage}
+            // component="img"
+            // src={WhyImage}
             sx={{
               width: "100%",
               height: "auto",
@@ -160,7 +160,7 @@ const WhySection: FC = () => (
             component="h2"
             gutterBottom
           >
-            Why
+            Significance of the Project
           </Typography>
 
           <Typography
