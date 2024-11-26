@@ -18,9 +18,20 @@ export default () => {
       }}
     >
       <Container maxWidth="lg">
+        <Box sx={{ textAlign: "center" }}>
+          <Typography variant="body2" color="text.secondary">
+            All images displayed are used from the public domains Wikimedia
+            Commons and GetArchive.
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            We do not claim ownership of any images displayed from these
+            platforms within this website.
+          </Typography>
+        </Box>
         <Stack
           direction={{ xs: "column", sm: "row" }}
           spacing={2}
+          sx={{ mt: 1 }}
           divider={<Divider orientation="vertical" flexItem />}
           justifyContent="center"
           alignItems="center"
