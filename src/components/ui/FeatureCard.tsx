@@ -36,7 +36,6 @@ const FeatureCard: FC<FeatureCardProps> = ({
         },
       }}
     >
-      {/* Simple vertical stack layout */}
       <CardContent
         sx={{
           p: "0 !important",
@@ -45,7 +44,6 @@ const FeatureCard: FC<FeatureCardProps> = ({
           flexDirection: "column",
         }}
       >
-        {/* Icon Section */}
         <Box
           sx={{
             bgcolor: "transparent",
@@ -58,7 +56,6 @@ const FeatureCard: FC<FeatureCardProps> = ({
           <Icon sx={{ fontSize: 100 }} />
         </Box>
 
-        {/* Title Section */}
         <Box
           sx={{
             p: 2,
@@ -76,7 +73,6 @@ const FeatureCard: FC<FeatureCardProps> = ({
           </Typography>
         </Box>
 
-        {/* Description Section */}
         <Box
           sx={{
             p: 2,
@@ -95,7 +91,6 @@ const FeatureCard: FC<FeatureCardProps> = ({
           </Typography>
         </Box>
 
-        {/* Button Section */}
         <Box
           sx={{
             p: 2,

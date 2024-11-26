@@ -11,28 +11,40 @@ import { SpeakerGroup } from "@mui/icons-material";
 
 const interviews = [
   {
-    id: 1,
-    title: "Interview with Palestinian Elder",
-    location: "West Bank",
-    year: 2022,
-    audioUrl: "/path/to/audio1.mp3",
-    transcript: `The majority of interviews were conducted in Arabic, with some participants—particularly those in the diaspora—initially preferring English. However, after a few minutes of conversation, many switched back to Arabic, which was embedded in emotional expressiveness, contrary to an emotional distance within speaking English.`,
-  },
-  {
-    id: 2,
-    title: "Childhood Memories from Gaza",
-    location: "Gaza",
+    title: "July 1, 2023 ابو ايمن Rulkrum",
+    location: "---",
     year: 2023,
-    audioUrl: "/path/to/audio2.mp3",
-    transcript: `Since the inception of this project, the collection of individual oral histories has been broad and inclusive, aiming to represent the diversity of Palestinian experiences. Participants have been drawn from various geographic locations and backgrounds, including The West Bank, Gaza, Palestinians in Israel, Palestinian refugees in Lebanon and Jordan, and the Palestinian diaspora in countries like the United States and Canada.`,
+    audioUrl: "/src/assets/audio/July 1.2023 ابو ايمنRulkrum.wav",
   },
   {
-    id: 3,
-    title: "Diaspora Stories",
-    location: "Michigan, USA",
-    year: 2024,
-    audioUrl: "/path/to/audio3.mp3",
-    transcript: `The participants reflect the geographical and cultural diversity, ensuring that the project captures the variety of experiences and contexts that shaped Palestinian childhoods during the British Mandate, from urban to rural and Bedouin communities.`,
+    title: "July 15,2023 شكري عارق وزوجته rose",
+    location: "---",
+    year: 2023,
+    audioUrl: "/src/assets/audio/July15.2023شكري عارق وزوجته rose.wav",
+  },
+  {
+    title: "ام مازن ترشحه July 14, 2023.wav",
+    location: "---",
+    year: 2023,
+    audioUrl: "/src/assets/audio/ام مازن ترشحه July 14, 2023.wav",
+  },
+  {
+    title: "July 20, 2022 برك سلمان",
+    location: "---",
+    year: 2022,
+    audioUrl: "/src/assets/audio/Barak-Salman-July-20-2022.mp3",
+  },
+  {
+    title: "Jouad Albyra July 4, 2022",
+    location: "---",
+    year: 2022,
+    audioUrl: "/src/assets/audio/Jouad Albyra July4, 2022.mp3",
+  },
+  {
+    title: "July 13, 2022 سلوي جفنا Salwa Jefna",
+    location: "---",
+    year: 2022,
+    audioUrl: "/src/assets/audio/July13.2022سلوي جفنا SalwaJefna.mp3",
   },
 ];
 
@@ -56,7 +68,7 @@ const AudioPlayer = ({ audioUrl, title, location, year }) => {
             </Typography>
           </Grid>
           <Grid item>
-            <ReactAudioPlayer src={audioUrl} autoPlay controls />
+            <ReactAudioPlayer src={audioUrl} controls />
           </Grid>
         </Grid>
       </CardContent>
@@ -90,8 +102,11 @@ const OralHistory = () => {
 
       <Box sx={{ bgcolor: "background.paper", py: 6 }}>
         <Container>
-          {paragraphs.map((p) => (
-            <Typography sx={{ color: "text.secondary", marginBottom: 2 }}>
+          {paragraphs.map((p, index) => (
+            <Typography
+              key={index}
+              sx={{ color: "text.secondary", marginBottom: 2 }}
+            >
               {p}
             </Typography>
           ))}
@@ -106,7 +121,7 @@ const OralHistory = () => {
           <Box sx={{ mt: 4 }}>
             {interviews.map((interview) => (
               <AudioPlayer
-                key={interview.id}
+                key={interview.title}
                 audioUrl={interview.audioUrl}
                 title={interview.title}
                 location={interview.location}

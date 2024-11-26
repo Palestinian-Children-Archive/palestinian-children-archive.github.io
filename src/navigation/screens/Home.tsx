@@ -10,9 +10,10 @@ import {
 import { motion } from "framer-motion";
 
 import { pages } from "../routes";
-import HeroImage from "../../assets/hero-image.png";
-import WhyImage from "../../assets/why.jpg";
+import HeroImage from "../../assets/images/hero.png";
+import WhyImage from "../../assets/images/significance.png";
 import FeatureCard from "@/components/ui/FeatureCard";
+import { Link } from "react-router-dom";
 
 const MotionBox = motion(Box);
 const MotionTypography = motion(Typography);
@@ -27,7 +28,7 @@ const HeroSection: FC = () => {
       transition={{ duration: 1 }}
       sx={{
         position: "relative",
-        // backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${HeroImage})`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${HeroImage})`,
         bgcolor: "ActiveBorder",
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -72,7 +73,7 @@ const HeroSection: FC = () => {
           borderRadius: 1,
         }}
       >
-        Hero Image © [Credit Name]
+        © Wikimedia Commons and GetArchive
       </Typography>
     </MotionBox>
   );
@@ -131,8 +132,8 @@ const WhySection: FC = () => (
           viewport={{ once: true }}
         >
           <Box
-            // component="img"
-            // src={WhyImage}
+            component="img"
+            src={WhyImage}
             sx={{
               width: "100%",
               height: "auto",
@@ -149,7 +150,7 @@ const WhySection: FC = () => (
               borderRadius: 1,
             }}
           >
-            © [Credit Name]
+            © Wikimedia Commons and GetArchive
           </Typography>
         </MotionGrid>
         <MotionGrid
@@ -266,8 +267,14 @@ const WhySection: FC = () => (
             record and inspire other communities whose histories have been
             shaped or distorted by colonial policies.
           </Typography>
-          <Button variant="contained" size="large" sx={{ mt: 3 }}>
-            View Project Documentation
+          <Button
+            component={Link}
+            to="/about-us"
+            variant="contained"
+            size="large"
+            sx={{ mt: 3 }}
+          >
+            About the Project
           </Button>
         </MotionGrid>
       </Grid>

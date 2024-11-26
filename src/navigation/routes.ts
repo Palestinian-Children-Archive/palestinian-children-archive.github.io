@@ -8,7 +8,7 @@ import {
 
 import Home from "./screens/Home";
 import OralHistory from "./screens/OralHistory";
-import ChildhoodRecords from "./screens/ChildhoodRecords";
+import ChildhoodRecords from "./screens/HumanExperiences";
 import AboutUs from "./screens/AboutUs";
 import Infrastructure from "./screens/Infrastructure";
 
