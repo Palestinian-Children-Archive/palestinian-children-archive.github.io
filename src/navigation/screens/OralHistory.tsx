@@ -8,12 +8,12 @@ import {
   CardContent,
 } from "@mui/material";
 import { SpeakerGroup } from "@mui/icons-material";
-import audio1 from "../../assets/audio/July 1.2023 ابو ايمنRulkrum.wav";
-import audio2 from "../../assets/audio/July15.2023شكري عارق وزوجته rose.wav";
-import audio3 from "../../assets/audio/ام مازن ترشحه July 14, 2023.wav";
-import audio4 from "../../assets/audio/Barak-Salman-July-20-2022.mp3";
-import audio5 from "../../assets/audio/Jouad Albyra July4, 2022.mp3";
-import audio6 from "../../assets/audio/July13.2022سلوي جفنا SalwaJefna.mp3";
+import audio1 from "/audio/July 1.2023 ابو ايمنRulkrum.wav";
+import audio2 from "/audio/July15.2023شكري عارق وزوجته rose.wav";
+import audio3 from "/audio/ام مازن ترشحه July 14, 2023.wav";
+import audio4 from "/audio/Barak-Salman-July-20-2022.mp3";
+import audio5 from "/audio/Jouad Albyra July4, 2022.mp3";
+import audio6 from "/audio/July13.2022سلوي جفنا SalwaJefna.mp3";
 
 const interviews = [
   {
