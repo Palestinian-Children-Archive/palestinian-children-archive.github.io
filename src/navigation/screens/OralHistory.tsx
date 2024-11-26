@@ -8,43 +8,49 @@ import {
   CardContent,
 } from "@mui/material";
 import { SpeakerGroup } from "@mui/icons-material";
+import audio1 from "../../assets/audio/July 1.2023 ابو ايمنRulkrum.wav";
+import audio2 from "../../assets/audio/July15.2023شكري عارق وزوجته rose.wav";
+import audio3 from "../../assets/audio/ام مازن ترشحه July 14, 2023.wav";
+import audio4 from "../../assets/audio/Barak-Salman-July-20-2022.mp3";
+import audio5 from "../../assets/audio/Jouad Albyra July4, 2022.mp3";
+import audio6 from "../../assets/audio/July13.2022سلوي جفنا SalwaJefna.mp3";
 
 const interviews = [
   {
     title: "July 1, 2023 ابو ايمن Rulkrum",
     location: "---",
     year: 2023,
-    audioUrl: "/src/assets/audio/July 1.2023 ابو ايمنRulkrum.wav",
+    audioUrl: audio1,
   },
   {
     title: "July 15,2023 شكري عارق وزوجته rose",
     location: "---",
     year: 2023,
-    audioUrl: "/src/assets/audio/July15.2023شكري عارق وزوجته rose.wav",
+    audioUrl: audio2,
   },
   {
     title: "ام مازن ترشحه July 14, 2023.wav",
     location: "---",
     year: 2023,
-    audioUrl: "/src/assets/audio/ام مازن ترشحه July 14, 2023.wav",
+    audioUrl: audio3,
   },
   {
     title: "July 20, 2022 برك سلمان",
     location: "---",
     year: 2022,
-    audioUrl: "/src/assets/audio/Barak-Salman-July-20-2022.mp3",
+    audioUrl: audio4,
   },
   {
     title: "Jouad Albyra July 4, 2022",
     location: "---",
     year: 2022,
-    audioUrl: "/src/assets/audio/Jouad Albyra July4, 2022.mp3",
+    audioUrl: audio5,
   },
   {
     title: "July 13, 2022 سلوي جفنا Salwa Jefna",
     location: "---",
     year: 2022,
-    audioUrl: "/src/assets/audio/July13.2022سلوي جفنا SalwaJefna.mp3",
+    audioUrl: audio6,
   },
 ];
 
