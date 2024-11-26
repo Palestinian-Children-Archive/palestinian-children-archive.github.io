@@ -8,49 +8,49 @@ import {
   CardContent,
 } from "@mui/material";
 import { SpeakerGroup } from "@mui/icons-material";
-import audio1 from "/audio/July 1.2023 ابو ايمنRulkrum.wav";
-import audio2 from "/audio/July15.2023شكري عارق وزوجته rose.wav";
-import audio3 from "/audio/ام مازن ترشحه July 14, 2023.wav";
-import audio4 from "/audio/Barak-Salman-July-20-2022.mp3";
-import audio5 from "/audio/Jouad Albyra July4, 2022.mp3";
-import audio6 from "/audio/July13.2022سلوي جفنا SalwaJefna.mp3";
 
 const interviews = [
   {
     title: "July 1, 2023 ابو ايمن Rulkrum",
     location: "---",
     year: 2023,
-    audioUrl: audio1,
+    audioUrl:
+      "https://www.dropbox.com/scl/fi/ieyf9c95ofgmg16hxji5v/July-1.2023-Rulkrum.wav?rlkey=1dh5eije0wyh971kb0u654fo8&st=nbgwc5ka&dl=1",
   },
   {
     title: "July 15,2023 شكري عارق وزوجته rose",
     location: "---",
     year: 2023,
-    audioUrl: audio2,
+    audioUrl:
+      "https://www.dropbox.com/scl/fi/9902mjfv5g7bnr97nbwbf/July15.2023-rose.wav?rlkey=7wp3vhqqi2okjim0ucwel0ipv&st=gwsfrzui&dl=1",
   },
   {
     title: "ام مازن ترشحه July 14, 2023.wav",
     location: "---",
     year: 2023,
-    audioUrl: audio3,
+    audioUrl:
+      "https://www.dropbox.com/scl/fi/vh3cjo0qw176znwc1zips/July-14-2023.wav?rlkey=xxbda9av51sswcilfhz8s39tm&st=7x0qy3ug&dl=1",
   },
   {
     title: "July 20, 2022 برك سلمان",
     location: "---",
     year: 2022,
-    audioUrl: audio4,
+    audioUrl:
+      "https://www.dropbox.com/scl/fi/3nshkjv05fc7xnjavehn9/Barak-Salman-July-20-2022.mp3?rlkey=f5guiqslje2fl0yej9al5isqa&st=spwhf4ml&dl=1",
   },
   {
     title: "Jouad Albyra July 4, 2022",
     location: "---",
     year: 2022,
-    audioUrl: audio5,
+    audioUrl:
+      "https://www.dropbox.com/scl/fi/fbjru0hoe3cem0zf32fms/Jouad-Albyra-July4-2022.mp3?rlkey=sb3bsjzdi44nfagrmr4kibg40&st=qix7akbr&dl=1",
   },
   {
     title: "July 13, 2022 سلوي جفنا Salwa Jefna",
     location: "---",
     year: 2022,
-    audioUrl: audio6,
+    audioUrl:
+      "https://www.dropbox.com/scl/fi/7tj0idkrd37jdm7zzbj8f/July13.2022-SalwaJefna.mp3?rlkey=810qs0t2gzcra7in26tv9vx8l&st=aik0voxi&dl=1",
   },
 ];
 
