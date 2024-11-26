@@ -8,16 +8,18 @@ import {
   useTheme,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Link } from "react-router-dom";
 
 import { pages } from "../routes";
 import HeroImage from "../../assets/images/hero.png";
 import WhyImage from "../../assets/images/significance.png";
 import FeatureCard from "@/components/ui/FeatureCard";
-import { Link } from "react-router-dom";
 
 const MotionBox = motion(Box);
 const MotionTypography = motion(Typography);
 const MotionGrid = motion(Grid);
+const MotionIcon = motion(KeyboardArrowDownIcon);
 
 const HeroSection: FC = () => {
   const theme = useTheme();
@@ -61,6 +63,34 @@ const HeroSection: FC = () => {
         </MotionBox>
       </Box>
 
+      <MotionIcon
+        initial={{ opacity: 0, y: -20 }}
+        animate={{
+          opacity: [0, 1, 1, 0],
+          y: [0, 20, 20, 0],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        sx={{
+          position: "absolute",
+          bottom: 20,
+          left: "50%",
+          transform: "translateX(-50%)",
+          color: "white",
+          fontSize: 48,
+          cursor: "pointer",
+        }}
+        onClick={() => {
+          window.scrollTo({
+            top: window.innerHeight,
+            behavior: "smooth",
+          });
+        }}
+      />
+
       <Typography
         variant="caption"
         sx={{
@@ -78,6 +108,7 @@ const HeroSection: FC = () => {
     </MotionBox>
   );
 };
+
 const FeaturesSection: FC = () => (
   <Container sx={{ py: 8 }}>
     <MotionTypography
