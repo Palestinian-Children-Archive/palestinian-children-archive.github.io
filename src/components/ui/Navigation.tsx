@@ -171,7 +171,7 @@ export default function Navigation() {
                   },
                 }}
               >
-                Palestinian Children Archive
+                Palestinian Children and Community Archive
               </Typography>
             </Box>
             <Button
@@ -227,7 +227,7 @@ export default function Navigation() {
                 fontWeight: 500,
               }}
             >
-              Palestinian Children Archive
+              Palestinian Children and Community Archive
             </Typography>
             <IconButton
               onClick={handleClose}

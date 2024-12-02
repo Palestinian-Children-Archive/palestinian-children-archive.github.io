@@ -53,7 +53,7 @@ const HeroSection: FC = () => {
           }}
         >
           <Typography variant="h3" component="h1" gutterBottom>
-            Palestinian Children Archive
+            Palestinian Children and Community Archive
           </Typography>
           <Typography variant="h6">
             Explore the lives of Palestine's children during the British Mandate
