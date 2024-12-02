@@ -171,7 +171,7 @@ export default function Navigation() {
                   },
                 }}
               >
-                Palestinian Children Archive
+                Palestinian Children and Community Archive
               </Typography>
             </Box>
             <Button
