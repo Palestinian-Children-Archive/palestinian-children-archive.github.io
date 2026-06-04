@@ -39,7 +39,7 @@ export const pages = [
   },
   {
     icon: BuildingIcon,
-    label: "Childhood Infrastructures",
+    label: "List of Childhood Infrastructure and Cultural Elements",
     description:
       "Learn about the buildings, schools, and other infrastructure essential to the lives of Palestinian children during the British Mandate of Palestine.",
     path: "/infrastructure",
