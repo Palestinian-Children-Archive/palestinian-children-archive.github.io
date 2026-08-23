@@ -141,6 +141,7 @@ const FeaturesSection: FC = () => (
             icon={feature.icon}
             title={feature.label}
             to={feature.path}
+            href={feature.href}
             order={index}
           />
         </MotionGrid>

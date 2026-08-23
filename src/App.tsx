@@ -10,9 +10,11 @@ function App() {
         <Navigation />
         <main className="flex-grow">
           <Routes>
-            {[...routes, ...pages].map((r) => (
-              <Route key={r.path} path={r.path} Component={r.component} />
-            ))}
+            {[...routes, ...pages]
+              .filter((r) => r.component)
+              .map((r) => (
+                <Route key={r.path} path={r.path} Component={r.component!} />
+              ))}
           </Routes>
         </main>
         <Footer />

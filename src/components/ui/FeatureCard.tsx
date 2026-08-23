@@ -8,6 +8,8 @@ interface FeatureCardProps {
   title: string;
   description: string;
   to: string;
+  /** Set instead of `to` to link out to a separate site. */
+  href?: string;
   order: number;
 }
 
@@ -16,6 +18,7 @@ const FeatureCard: FC<FeatureCardProps> = ({
   title,
   description,
   to,
+  href,
   order,
 }) => {
   const theme = useTheme();
@@ -98,8 +101,7 @@ const FeatureCard: FC<FeatureCardProps> = ({
           }}
         >
           <Button
-            component={Link}
-            to={to}
+            {...(href ? { component: "a", href } : { component: Link, to })}
             variant="contained"
             sx={{
               backgroundColor: "rgba(0, 0, 0, 0.2)",
