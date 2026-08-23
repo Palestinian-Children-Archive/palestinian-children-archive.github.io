@@ -1,4 +1,11 @@
-import { Box, Container, Typography, Stack, Divider } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Stack,
+  Divider,
+  Link as MuiLink,
+} from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default () => {
@@ -36,6 +43,14 @@ export default () => {
           justifyContent="center"
           alignItems="center"
         >
+          <MuiLink
+            href="https://palestinian-children-archive.github.io/pcca/"
+            variant="body2"
+            underline="hover"
+            color="text.secondary"
+          >
+            Collection Data
+          </MuiLink>
           <Typography variant="body2" color="text.secondary">
             Built with{" "}
             <FavoriteIcon

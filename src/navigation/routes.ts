@@ -2,8 +2,10 @@ import { FC } from "react";
 import {
   Book as BookIcon,
   AccountBalance as BuildingIcon,
+  Dataset as DatasetIcon,
   SpeakerGroup,
   QuestionMark,
+  SvgIconComponent,
 } from "@mui/icons-material";
 
 import Home from "./screens/Home";
@@ -18,9 +20,20 @@ interface RouteConfig {
   component: FC;
 }
 
+export interface PageConfig {
+  icon: SvgIconComponent;
+  label: string;
+  description: string;
+  path: string;
+  /** Set for pages rendered by this app. Omitted for external destinations. */
+  component?: FC;
+  /** Set instead of `component` to link out to a separate site. */
+  href?: string;
+}
+
 const routes: RouteConfig[] = [{ path: "/", label: "Home", component: Home }];
 
-export const pages = [
+export const pages: PageConfig[] = [
   {
     icon: SpeakerGroup,
     label: "Individual Oral History",
@@ -44,6 +57,15 @@ export const pages = [
       "Learn about the buildings, schools, and other infrastructure essential to the lives of Palestinian children during the British Mandate of Palestine.",
     path: "/infrastructure",
     component: Infrastructure,
+  },
+
+  {
+    icon: DatasetIcon,
+    label: "Collection Data",
+    description:
+      "Search, browse, and download the full archive dataset \u2014 the records behind this site, published as a digital collection.",
+    path: "/collection-data",
+    href: "https://palestinian-children-archive.github.io/pcca/",
   },
 
   {

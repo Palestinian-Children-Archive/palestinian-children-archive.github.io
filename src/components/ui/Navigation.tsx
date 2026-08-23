@@ -20,6 +20,7 @@ import {
   Close as CloseIcon,
   Menu as MenuIcon,
   KeyboardArrowUp as KeyboardArrowUpIcon,
+  SvgIconComponent,
 } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 import { pages } from "@/navigation/routes";
@@ -65,17 +66,28 @@ function ScrollTop() {
   );
 }
 
+interface MenuButtonProps {
+  icon: SvgIconComponent;
+  label: string;
+  description: string;
+  onClick: () => void;
+  to: string;
+  /** Set instead of `to` to link out to a separate site. */
+  href?: string;
+  isActive: boolean;
+}
+
 const MenuButton = ({
   icon: Icon,
   label,
   description,
   onClick,
   to,
+  href,
   isActive,
-}) => (
+}: MenuButtonProps) => (
   <Button
-    component={Link}
-    to={to}
+    {...(href ? { component: "a", href } : { component: Link, to })}
     onClick={onClick}
     sx={{
       width: "100%",
@@ -279,6 +291,7 @@ export default function Navigation() {
                   description={page.description}
                   onClick={handleClose}
                   to={page.path}
+                  href={page.href}
                   isActive={location.pathname === page.path}
                 />
               </Grid>
