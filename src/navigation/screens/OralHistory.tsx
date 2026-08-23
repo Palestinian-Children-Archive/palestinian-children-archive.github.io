@@ -15,42 +15,42 @@ const interviews = [
     location: "---",
     year: 2023,
     audioUrl:
-      "https://www.dropbox.com/scl/fi/ieyf9c95ofgmg16hxji5v/July-1.2023-Rulkrum.wav?rlkey=1dh5eije0wyh971kb0u654fo8&st=nbgwc5ka&dl=1",
+      `${import.meta.env.BASE_URL}audio/abu-ayman-rulkrum-2023-07-01.mp3`,
   },
   {
     title: "July 15,2023 شكري عارق وزوجته rose",
     location: "---",
     year: 2023,
     audioUrl:
-      "https://www.dropbox.com/scl/fi/9902mjfv5g7bnr97nbwbf/July15.2023-rose.wav?rlkey=7wp3vhqqi2okjim0ucwel0ipv&st=gwsfrzui&dl=1",
+      `${import.meta.env.BASE_URL}audio/shukri-areq-rose-2023-07-15.mp3`,
   },
   {
-    title: "ام مازن ترشحه July 14, 2023.wav",
+    title: "ام مازن ترشحه July 14, 2023",
     location: "---",
     year: 2023,
     audioUrl:
-      "https://www.dropbox.com/scl/fi/vh3cjo0qw176znwc1zips/July-14-2023.wav?rlkey=xxbda9av51sswcilfhz8s39tm&st=7x0qy3ug&dl=1",
+      `${import.meta.env.BASE_URL}audio/umm-mazen-tarsheha-2023-07-14.mp3`,
   },
   {
     title: "July 20, 2022 برك سلمان",
     location: "---",
     year: 2022,
     audioUrl:
-      "https://www.dropbox.com/scl/fi/3nshkjv05fc7xnjavehn9/Barak-Salman-July-20-2022.mp3?rlkey=f5guiqslje2fl0yej9al5isqa&st=spwhf4ml&dl=1",
+      `${import.meta.env.BASE_URL}audio/barak-salman-2022-07-20.mp3`,
   },
   {
     title: "Jouad Albyra July 4, 2022",
     location: "---",
     year: 2022,
     audioUrl:
-      "https://www.dropbox.com/scl/fi/fbjru0hoe3cem0zf32fms/Jouad-Albyra-July4-2022.mp3?rlkey=sb3bsjzdi44nfagrmr4kibg40&st=qix7akbr&dl=1",
+      `${import.meta.env.BASE_URL}audio/jouad-albyra-2022-07-04.mp3`,
   },
   {
     title: "July 13, 2022 سلوي جفنا Salwa Jefna",
     location: "---",
     year: 2022,
     audioUrl:
-      "https://www.dropbox.com/scl/fi/7tj0idkrd37jdm7zzbj8f/July13.2022-SalwaJefna.mp3?rlkey=810qs0t2gzcra7in26tv9vx8l&st=aik0voxi&dl=1",
+      `${import.meta.env.BASE_URL}audio/salwa-jefna-2022-07-13.mp3`,
   },
 ];
 
