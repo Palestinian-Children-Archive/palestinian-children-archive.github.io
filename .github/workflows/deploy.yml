@@ -59,6 +59,28 @@ jobs:
           git init -q -b gh-pages
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # The published tree is around 7 MB once the Git LFS audio is checked
+          # out as real files, and it is pushed as a fresh orphan history every
+          # run, so there is no delta for the server to reuse. Git's default
+          # 1 MB post buffer chunks a pack that size over HTTP/2, and the first
+          # run died with "RPC failed; HTTP 408" and "unexpected disconnect
+          # while reading sideband packet". A large buffer over HTTP/1.1 sends
+          # it as one request instead.
+          git config http.postBuffer 524288000
+          git config http.version HTTP/1.1
+
           git add -A
           git commit -q -m "Deploy ${GITHUB_SHA} from ${GITHUB_REF_NAME}"
-          git push -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
+
+          remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          for attempt in 1 2 3; do
+            if git push -f "$remote" gh-pages; then
+              echo "Published to gh-pages on attempt ${attempt}."
+              exit 0
+            fi
+            echo "::warning::Push attempt ${attempt} failed; retrying."
+            sleep $(( attempt * 15 ))
+          done
+          echo "::error::Could not push the built site to gh-pages after 3 attempts."
+          exit 1
