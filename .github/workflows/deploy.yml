@@ -1,0 +1,64 @@
+name: Deploy site
+
+# The site is served from the gh-pages branch, which until now was published by
+# running `npm run deploy` by hand. This builds and publishes it on every push
+# to main instead. `npm run deploy` still works locally and is unchanged.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Never let two deploys race to force-push gh-pages.
+concurrency:
+  group: deploy-gh-pages
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          # The oral history audio in public/audio is tracked with Git LFS.
+          # Without this the checkout yields ~133-byte pointer stubs, which
+          # build and publish cleanly but serve as unplayable garbage.
+          lfs: true
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify Git LFS assets resolved
+        run: |
+          if grep -rlq "git-lfs.github.com/spec" dist/audio 2>/dev/null; then
+            echo "::error::Audio assets are still Git LFS pointer stubs; refusing to publish a broken Oral History page."
+            grep -rl "git-lfs.github.com/spec" dist/audio
+            exit 1
+          fi
+          echo "Audio assets resolved to real files."
+
+      - name: Publish to gh-pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Bypass Jekyll processing on the published branch.
+          touch dist/.nojekyll
+          cd dist
+          git init -q -b gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Deploy ${GITHUB_SHA} from ${GITHUB_REF_NAME}"
+          git push -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
