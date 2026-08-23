@@ -1,14 +1,14 @@
 name: Deploy site
 
-# The site is served from the gh-pages branch, which until now was published by
-# running `npm run deploy` by hand. This builds and publishes it on every push
-# to main instead. `npm run deploy` still works locally and is unchanged.
+# The site is served from the gh-pages branch, which was previously built and
+# pushed by running `npm run deploy` by hand. This builds and publishes it on
+# every push to main instead. `npm run deploy` still works locally.
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
-# Never let two deploys race to force-push gh-pages.
+# Never let two deploys race on gh-pages.
 concurrency:
   group: deploy-gh-pages
   cancel-in-progress: true
@@ -22,18 +22,13 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-        # Deliberately no `lfs: true`. The oral history audio in public/audio is
-        # 698 MB across six files, three of them over GitHub's hard 100 MB
-        # per-file limit, which is why it is in LFS in the first place. Checking
-        # it out for real makes the gh-pages push fail outright:
-        #   remote: error: File audio/...rose.wav is 230.77 MB; this exceeds
-        #   GitHub's file size limit of 100.00 MB
-        #   ! [remote rejected] gh-pages -> gh-pages (pre-receive hook declined)
-        # GitHub Pages cannot serve these files by any route, and it never has:
-        # the live gh-pages branch has only ever carried the 133-byte pointer
-        # stubs. Publishing stubs is the pre-existing behaviour, so this
-        # workflow reproduces it rather than silently changing it, and the step
-        # below reports the situation on every run.
+        with:
+          # public/audio holds the web-delivery MP3s, committed directly rather
+          # than through LFS: GitHub Pages does not resolve LFS pointers, so an
+          # LFS-tracked file publishes as an unplayable 133-byte stub. The
+          # full-resolution masters live in audio-masters/, which is LFS-tracked
+          # and outside the Vite build, so it is never published.
+          lfs: false
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -47,51 +42,74 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Report unplayable audio assets
+      - name: Check what is about to be published
         run: |
-          # Not a gate: these files cannot be hosted on Pages at any size, so
-          # failing here would only block every deploy. Surface it instead, so
-          # the state is visible in each run rather than silently shipped.
-          stubs=$(grep -rl "git-lfs.github.com/spec" dist/audio 2>/dev/null || true)
-          if [ -n "$stubs" ]; then
-            echo "::warning::Oral history audio is published as Git LFS pointer stubs and will not play. GitHub Pages cannot serve these files: they total 698 MB and three exceed the 100 MB per-file limit. They need to be hosted off GitHub Pages, or re-encoded to a web-deliverable size, and the audio URLs pointed at that host."
-            echo "$stubs" | sed 's/^/  stub: /'
-          else
-            echo "Audio assets resolved to real files."
+          # GitHub rejects any file over 100 MB, which would fail the publish
+          # only after uploading everything. Catch it before the upload.
+          big=$(find dist -type f -size +99M)
+          if [ -n "$big" ]; then
+            echo "::error::These files exceed GitHub's 100 MB limit and cannot be published:"
+            echo "$big" | while read -r f; do echo "  $(du -h "$f")"; done
+            exit 1
           fi
+
+          # An LFS pointer would publish as an unplayable 133-byte text file.
+          stubs=$(grep -rl "git-lfs.github.com/spec" dist 2>/dev/null || true)
+          if [ -n "$stubs" ]; then
+            echo "::error::These files are Git LFS pointer stubs rather than real content:"
+            echo "$stubs" | sed 's/^/  /'
+            exit 1
+          fi
+
+          echo "Publishing $(du -sh dist | cut -f1) across $(find dist -type f | wc -l) files; none over 100 MB, no LFS stubs."
 
       - name: Publish to gh-pages
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Bypass Jekyll processing on the published branch.
-          touch dist/.nojekyll
-          cd dist
-          git init -q -b gh-pages
+          remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+
+          # Commit on top of the existing gh-pages history rather than force-
+          # pushing a fresh orphan each run. An orphan has no common ancestor,
+          # so every file is uploaded every time; the audio alone is ~180 MB and
+          # changes almost never. Cloning the branch first means git sends only
+          # what actually changed.
+          if ! git clone --branch gh-pages --single-branch "$remote" gh-pages-out; then
+            echo "No gh-pages branch yet; starting one."
+            mkdir gh-pages-out
+            git -C gh-pages-out init -q -b gh-pages
+            git -C gh-pages-out remote add origin "$remote"
+          fi
+
+          # Replace the working tree with the fresh build, preserving .git.
+          find gh-pages-out -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a dist/. gh-pages-out/
+          touch gh-pages-out/.nojekyll   # serve the Vite output as-is
+
+          cd gh-pages-out
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
 
-          # The published tree is around 7 MB once the Git LFS audio is checked
-          # out as real files, and it is pushed as a fresh orphan history every
-          # run, so there is no delta for the server to reuse. Git's default
-          # 1 MB post buffer chunks a pack that size over HTTP/2, and the first
-          # run died with "RPC failed; HTTP 408" and "unexpected disconnect
-          # while reading sideband packet". A large buffer over HTTP/1.1 sends
-          # it as one request instead.
+          if git diff --cached --quiet; then
+            echo "Build output is identical to what is already published; nothing to do."
+            exit 0
+          fi
+
+          git commit -q -m "Deploy ${GITHUB_SHA} from ${GITHUB_REF_NAME}"
+
+          # The first publish carrying the audio is a large upload; keep it in
+          # one request rather than a chunked HTTP/2 one.
           git config http.postBuffer 524288000
           git config http.version HTTP/1.1
 
-          git add -A
-          git commit -q -m "Deploy ${GITHUB_SHA} from ${GITHUB_REF_NAME}"
-
-          remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           for attempt in 1 2 3; do
-            if git push -f "$remote" gh-pages; then
+            if git push origin gh-pages; then
               echo "Published to gh-pages on attempt ${attempt}."
               exit 0
             fi
             echo "::warning::Push attempt ${attempt} failed; retrying."
-            sleep $(( attempt * 15 ))
+            sleep $(( attempt * 20 ))
           done
           echo "::error::Could not push the built site to gh-pages after 3 attempts."
           exit 1
