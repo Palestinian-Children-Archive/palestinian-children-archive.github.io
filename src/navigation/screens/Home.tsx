@@ -53,7 +53,7 @@ const HeroSection: FC = () => {
           }}
         >
           <Typography variant="h3" component="h1" gutterBottom>
-            Palestinian Children and Community Archive
+            Palestinian Childhood Archive
           </Typography>
           <Typography variant="h6">
             Explore the lives of Palestine's children during the British Mandate
@@ -121,7 +121,7 @@ const FeaturesSection: FC = () => (
       sx={{ mb: 4, textAlign: "center" }}
       color="textPrimary"
     >
-      Explore the Palestinian Children Digital Archive
+      Explore the Palestinian Childhood Archive
     </MotionTypography>
     <Grid container spacing={4}>
       {pages.map((feature, index) => (
